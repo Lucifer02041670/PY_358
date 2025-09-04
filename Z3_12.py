@@ -113,6 +113,13 @@ class Quadrilateral(BasicShape):
 
         return t == d
 
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+
+        return True
+
 class Shapes:
     def __init__(self):
         self.shapes = []
@@ -173,5 +180,8 @@ if __name__ == "__main__":
     print(shape_col.square())
 
     with shape_col as shapes:
-        shapes.add(shape1, (0.5, 0.5))  # Добавляем новую точку к shape1
+        shapes.add(shape1, (0.5, 0.5))
         shapes.add(shape2, (1, 1))
+
+    with Quadrilateral([(0,0), (0,3), (2,3), (2,0)]) as Shape:
+        print(Shape/shape2)
